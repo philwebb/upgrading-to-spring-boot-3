@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: dog-service
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/dog-db"
+    username: "dog"
+    password: "woof"
+  jpa:
+    open-in-view: false
+  jmx:
+    enabled: true
+  sql:
+    init:
+      mode: always
+
+server:
+  error:
+    include-message: always
+
+management:
+  metrics:
+    web:
+      server:
+        request:
+          metric-name: "http.server.in"
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+
+application:
+  security:
+    users:
+    - name: "user"
+      password: "password"
+    - name: "admin"
+      password: "secret"
+      roles: ["admin"]
