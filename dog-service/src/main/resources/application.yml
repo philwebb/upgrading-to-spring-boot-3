@@ -9,6 +9,9 @@ spring:
     open-in-view: false
   jmx:
     enabled: true
+  mvc:
+    problemdetails:
+      enabled: true
   sql:
     init:
       mode: always
