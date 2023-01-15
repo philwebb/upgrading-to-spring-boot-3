@@ -34,7 +34,7 @@ public class SecurityConfiguration {
 
 	@Bean
 	InMemoryUserDetailsManager inMemoryUserDetailsManager(SecurityProperties properties) {
-		List<UserDetails> userDetails = properties.getUsers().stream().map(this::asUserDetails)
+		List<UserDetails> userDetails = properties.users().stream().map(this::asUserDetails)
 				.collect(Collectors.toList());
 		return new InMemoryUserDetailsManager(userDetails);
 	}
@@ -42,9 +42,9 @@ public class SecurityConfiguration {
 	private UserDetails asUserDetails(UserProperties properties) {
 		PropertyMapper map = PropertyMapper.get();
 		UserBuilder builder = User.builder();
-		map.from(properties::getName).to(builder::username);
-		map.from(properties::getPassword).as("{noop}"::concat).to(builder::password);
-		map.from(properties::getRoles).as(StringUtils::toStringArray).to(builder::roles);
+		map.from(properties::name).to(builder::username);
+		map.from(properties::password).as("{noop}"::concat).to(builder::password);
+		map.from(properties::roles).as(StringUtils::toStringArray).to(builder::roles);
 		return builder.build();
 	}
 
