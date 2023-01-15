@@ -35,6 +35,9 @@ management:
   endpoint:
     env:
       show-values: always
+  tracing:
+    sampling:
+      probability: 1.0
 
 application:
   security:
