@@ -9,6 +9,9 @@ import com.example.dogservice.domain.DogRepository;
 import com.example.dogservice.domain.Owner;
 import com.example.dogservice.domain.OwnerRepository;
 
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+
 /**
  * Dog owner service.
  */
@@ -19,17 +22,25 @@ public class OwnerService {
 
 	private final DogRepository dogRepository;
 
-	public OwnerService(OwnerRepository ownerRepository, DogRepository dogRepository) {
+	private final ObservationRegistry observationRegistry;
+
+	public OwnerService(OwnerRepository ownerRepository, DogRepository dogRepository,
+			ObservationRegistry observationRegistry) {
 		this.ownerRepository = ownerRepository;
 		this.dogRepository = dogRepository;
+		this.observationRegistry = observationRegistry;
 	}
 
 	public List<String> getOwnedDogNames(String ownerName) {
-		Owner owner = this.ownerRepository.findByNameIgnoringCase(ownerName);
-		if(owner == null) {
-			throw new NoSuchDogOwnerException(ownerName);
-		}
-		return this.dogRepository.findByOwner(owner).stream().map(Dog::getName).toList();
+		Observation observation = Observation.createNotStarted("owner", observationRegistry)
+				.contextualName("getting-owned-dogs").highCardinalityKeyValue("ownerName", ownerName);
+		return observation.observe(() -> {
+			Owner owner = this.ownerRepository.findByNameIgnoringCase(ownerName);
+			if (owner == null) {
+				throw new NoSuchDogOwnerException(ownerName);
+			}
+			return this.dogRepository.findByOwner(owner).stream().map(Dog::getName).toList();
+		});
 	}
 
 }
