@@ -2,7 +2,7 @@ package com.example.dogservice.security;
 
 import java.util.List;
 
-import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.ConstructorBinding;
 
 /**
  * User properties as defined in the {@link SecurityConfiguration}.
