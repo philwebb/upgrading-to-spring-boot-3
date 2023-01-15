@@ -18,11 +18,11 @@ server:
     include-message: always
 
 management:
-  metrics:
-    web:
+  observations:
+    http:
       server:
-        request:
-          metric-name: "http.server.in"
+        requests:
+          name: "http.server.in"
   endpoints:
     web:
       exposure:
