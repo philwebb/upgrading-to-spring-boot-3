@@ -1,7 +1,7 @@
 package com.example.dogservice.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
  * JPA entity for a dog owner.
