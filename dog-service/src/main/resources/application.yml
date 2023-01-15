@@ -32,6 +32,9 @@ management:
       exposure:
         include:
         - "*"
+  endpoint:
+    env:
+      show-values: always
 
 application:
   security:
