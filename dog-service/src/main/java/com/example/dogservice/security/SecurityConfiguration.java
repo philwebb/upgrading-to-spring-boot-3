@@ -1,7 +1,6 @@
 package com.example.dogservice.security;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.context.properties.PropertyMapper;
@@ -34,8 +33,7 @@ public class SecurityConfiguration {
 
 	@Bean
 	InMemoryUserDetailsManager inMemoryUserDetailsManager(SecurityProperties properties) {
-		List<UserDetails> userDetails = properties.users().stream().map(this::asUserDetails)
-				.collect(Collectors.toList());
+		List<UserDetails> userDetails = properties.users().stream().map(this::asUserDetails).toList();
 		return new InMemoryUserDetailsManager(userDetails);
 	}
 

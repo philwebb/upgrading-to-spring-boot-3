@@ -1,7 +1,6 @@
 package com.example.dogservice.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class OwnerService {
 		if(owner == null) {
 			throw new NoSuchDogOwnerException(ownerName);
 		}
-		return this.dogRepository.findByOwner(owner).stream().map(Dog::getName).collect(Collectors.toList());
+		return this.dogRepository.findByOwner(owner).stream().map(Dog::getName).toList();
 	}
 
 }
