@@ -2,8 +2,6 @@ package com.example.dogservice.security;
 
 import java.util.List;
 
-import org.springframework.boot.context.properties.bind.ConstructorBinding;
-
 /**
  * User properties as defined in the {@link SecurityConfiguration}.
  */
@@ -15,7 +13,6 @@ public class UserProperties {
 
 	private List<String> roles;
 
-	@ConstructorBinding
 	public UserProperties(String name, String password, List<String> roles) {
 		this.name = name;
 		this.password = password;
