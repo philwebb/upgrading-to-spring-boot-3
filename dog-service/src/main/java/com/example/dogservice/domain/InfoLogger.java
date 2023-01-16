@@ -1,8 +1,5 @@
 package com.example.dogservice.domain;
 
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -28,10 +25,8 @@ public class InfoLogger implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		log.info("Found owners {}",
-				StreamSupport.stream(this.ownerRepository.findAll().spliterator(), false).collect(Collectors.toList()));
-		log.info("Found dogs {}",
-				StreamSupport.stream(this.dogRepository.findAll().spliterator(), false).collect(Collectors.toList()));
+		log.info("Found owners {}", this.ownerRepository.findAll());
+		log.info("Found dogs {}", this.dogRepository.findAll());
 	}
 
 }
