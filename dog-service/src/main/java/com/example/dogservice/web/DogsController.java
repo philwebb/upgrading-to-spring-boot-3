@@ -1,6 +1,5 @@
 package com.example.dogservice.web;
 
-import java.util.Collections;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,7 @@ public class DogsController {
 	@GetMapping("/dogs")
 	public Map<String, String> dogs(@RequestParam(name = "aregood") boolean areGood) {
 		String message = (!areGood) ? "Go find a cat service!" : "We <3 dogs!!!";
-		return Collections.singletonMap("message", message);
+		return Map.of("message", message);
 	}
 
 }
