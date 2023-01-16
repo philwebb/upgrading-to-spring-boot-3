@@ -43,7 +43,7 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return String.format("%s owned by %s", this.name, this.owner);
+		return "%s owned by %s".formatted(this.name, this.owner);
 	}
 
 }
